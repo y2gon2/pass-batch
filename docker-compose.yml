@@ -13,6 +13,8 @@ services:                                         # 서비스들을 선언합니
     environment:                                  # 환경 변수
       - MYSQL_DATABASE=pass_local
       - MYSQL_USER=pass_local_user
-        - MYSQL_PASSWORD=passlocal123
+      - MYSQL_PASSWORD=passlocal123
       - MYSQL_ROOT_PASSWORD=passlocal123
       - TZ=Asia/Seoul
+      - MYSQL_CHARSET=utf8mb4
+      - MYSQL_COLLATION=utf8mb4_unicode_ci

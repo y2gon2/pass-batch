@@ -1,0 +1,9 @@
+spring:
+  jpa:
+    show-sql: true         # 쿼리를 표준 출력으로
+    properties:
+      hibernate:
+        format_sql: true   # 화면 출력 형식을 formatting 해서 정돈된 상태로 보여줌
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: trace

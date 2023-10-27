@@ -13,7 +13,7 @@ CREATE TABLE `package`
     `created_at`   timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 일시',
     `modified_at`  timestamp            DEFAULT NULL COMMENT '수정 일시',
     PRIMARY KEY (`package_seq`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='패키지';
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='패키지';
 
 CREATE TABLE `pass`
 (
@@ -28,7 +28,7 @@ CREATE TABLE `pass`
     `created_at`      timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 일시',
     `modified_at`     timestamp            DEFAULT NULL COMMENT '수정 일시',
     PRIMARY KEY (`pass_seq`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='이용권';
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='이용권';
 
 CREATE TABLE `booking`
 (
@@ -44,7 +44,7 @@ CREATE TABLE `booking`
     `created_at`   timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 일시',
     `modified_at`  timestamp            DEFAULT NULL COMMENT '수정 일시',
     PRIMARY KEY (`booking_seq`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='예약';
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='예약';
 
 CREATE TABLE `user`
 (
@@ -56,4 +56,4 @@ CREATE TABLE `user`
     `created_at`  timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 일시',
     `modified_at` timestamp            DEFAULT NULL COMMENT '수정 일시',
     PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='사용자';
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='사용자';

@@ -25,14 +25,22 @@ public class PassEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pass_seq;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "packageSeq")
-    private PackageEntity packageEntity;
+    @Column(nullable = false)
+    private Integer packageSeq;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "userId")
-    private UserEntity userEntity;
+    @Column(nullable = false)
+    private String userId;
 
+    // table 연동은 추후에
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "packageSeq")
+//    private PackageEntity packageEntity;
+//
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "userId")
+//    private UserEntity userEntity;
+
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PassStatus status;
 
@@ -43,5 +51,68 @@ public class PassEntity extends BaseEntity {
     private LocalDateTime startedAt;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime endedAt;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime expiredAt;
+
+    protected PassEntity() {};
+
+    private PassEntity(
+            Integer packageSeq,
+            String userId,
+            PassStatus status,
+            Integer remainingCount,
+            LocalDateTime startedAt,
+            LocalDateTime endedAt,
+            LocalDateTime expiredAt
+    ) {
+        this.packageSeq = packageSeq;
+        this.userId = userId;
+        this.status = status;
+        this.remainingCount = remainingCount;
+        this.startedAt = startedAt;
+        this.endedAt = endedAt;
+        this.expiredAt = expiredAt;
+    }
+
+    public static PassEntity of(
+            Integer packageSeq,
+            String userId,
+            PassStatus status,
+            Integer remainingCount,
+            LocalDateTime startedAt,
+            LocalDateTime endedAt,
+            LocalDateTime expiredAt
+    ) {
+      return new PassEntity(
+              packageSeq,
+              userId,
+              status,
+              remainingCount,
+              startedAt,
+              endedAt,
+              expiredAt
+      );
+    }
+
+    public static PassEntity of(
+            Integer packageSeq,
+            String userId,
+            PassStatus status,
+            Integer remainingCount,
+            LocalDateTime startedAt,
+            LocalDateTime endedAt
+    ) {
+        return new PassEntity(
+                packageSeq,
+                userId,
+                status,
+                remainingCount,
+                startedAt,
+                endedAt,
+                null
+        );
+    }
+
 }

@@ -19,7 +19,9 @@ import java.time.LocalDateTime;
 public class BookingEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer booking_seq;
+    private Integer bookingSeq;
+    private Integer passSeq;
+    private String userId;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "passSeq", insertable = false, updatable = false)
@@ -60,6 +62,8 @@ public class BookingEntity extends BaseEntity {
             LocalDateTime endedAt,
             LocalDateTime cancelledAt
     ) {
+        this.passSeq = passEntity.getPassSeq();
+        this.userId = userEntity.getUserId();
         this.passEntity = passEntity;
         this.userEntity = userEntity;
         this.status = status;

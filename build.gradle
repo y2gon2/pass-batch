@@ -25,12 +25,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux' // WebClient
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	// hibernate-types
+	// hibernate-types : 기본 hibernate 에서 지원하지 않는 type 지원 library
 	implementation 'com.vladmihalcea:hibernate-types-52:2.19.2'
 
 	// ######## test ########

@@ -23,7 +23,7 @@ public class PassEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pass_seq;
+    private Integer passSeq;
 
     @Column(nullable = false)
     private Integer packageSeq;

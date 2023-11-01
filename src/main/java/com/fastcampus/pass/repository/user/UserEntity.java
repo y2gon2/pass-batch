@@ -1,5 +1,6 @@
 package com.fastcampus.pass.repository.user;
 
+import com.fastcampus.pass.repository.BaseEntity;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import java.util.Map;
 // JSON data 를 Map 으로 변환하여 field value 로 사용 가능하도록 type 변환 annotation
 @TypeDef(name = "json", typeClass = JsonStringType.class)
 @Entity
-public class UserEntity {
+public class UserEntity extends BaseEntity {
 
     @Id
     private String userId;

@@ -12,3 +12,6 @@ spring:
       initialize-schema: always
       isolation-level-for-create: default
 
+kakaotalk:
+  host: https://kapi.kakao.com
+  token: YOUR_ACCESS_TOKEN

@@ -5,6 +5,7 @@ import com.fastcampus.pass.repository.pass.PassEntity;
 import com.fastcampus.pass.repository.pass.PassRepository;
 import com.fastcampus.pass.repository.pass.PassStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobExecution;
@@ -25,6 +26,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+@DisplayName("이용권 만료 batch 처리 test")
 @Slf4j
 @SpringBatchTest
 @SpringBootTest

@@ -14,6 +14,7 @@ import com.fastcampus.pass.repository.user.UserEntity;
 import com.fastcampus.pass.repository.user.UserRepository;
 import com.fastcampus.pass.repository.user.UserStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobExecution;
@@ -33,6 +34,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+@DisplayName("예약 알림 batch 기능 test")
 @Slf4j
 @SpringBatchTest
 @SpringBootTest
@@ -57,6 +59,7 @@ public class SendNotificationBeforeClassJobConfigTest {
     private UserRepository userRepository;
 
 
+    @DisplayName("시작 10 분전인 booking record 를 찾아 notificaton record 생성")
     @Test
     public void test_addNotificationStep() throws Exception {
         // given

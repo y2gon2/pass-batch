@@ -95,3 +95,14 @@ CREATE TABLE `notification`
     `modified_at`      timestamp              DEFAULT NULL COMMENT '수정 일시',
     PRIMARY KEY (`notification_seq`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='알람';
+
+CREATE TABLE `statistics`
+(
+    `statistics_seq`      int       NOT NULL AUTO_INCREMENT COMMENT '통계 순번',
+    `statistics_at`       timestamp NOT NULL COMMENT '통계 일시',
+    `all_count`           int       NOT NULL DEFAULT 0 COMMENT '전체 횟수',
+    `attended_count`      int       NOT NULL DEFAULT 0 COMMENT '출석 횟수',
+    `cancelled_count`     int       NOT NULL DEFAULT 0 COMMENT '취소 횟수',
+    PRIMARY KEY (`statistics_seq`),
+    INDEX idx_statistics_at (`statistics_at`)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='통계';

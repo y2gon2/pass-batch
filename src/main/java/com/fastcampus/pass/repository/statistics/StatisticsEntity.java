@@ -39,9 +39,11 @@ public class StatisticsEntity {
 
         if (bookingEntity.isAttended()) {
             statisticsEntity.setAttendedCount(1);
+            statisticsEntity.setCancelledCount(0);
         }
 
         if (BookingStatus.CANCELLED.equals(bookingEntity.getStatus())) {
+            statisticsEntity.setAttendedCount(0);
             statisticsEntity.setCancelledCount(1);
         }
 

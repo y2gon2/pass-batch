@@ -1,9 +1,11 @@
 package com.fastcampus.pass.job.statistics;
 
 import com.fastcampus.pass.repository.booking.BookingEntity;
+import com.fastcampus.pass.repository.booking.BookingStatus;
 import com.fastcampus.pass.repository.statistics.StatisticsEntity;
 import com.fastcampus.pass.repository.statistics.StatisticsRepository;
 import com.fastcampus.pass.util.LocalDateTimeUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -11,7 +13,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.FlowBuilder;
 import org.springframework.batch.core.job.flow.Flow;
-import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaCursorItemReader;
 import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
@@ -27,6 +28,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Configuration
 public class MakeStatisticsJobConfig {
     private final int CHUNK_SIZE = 10;
@@ -87,6 +89,7 @@ public class MakeStatisticsJobConfig {
                 .<BookingEntity, BookingEntity>chunk(CHUNK_SIZE)
                 .reader(addStatisticsItemReader(null, null))
                 .writer(addStatisticsItemWriter())
+                .allowStartIfComplete(true)
                 .build();
     }
 
@@ -103,7 +106,7 @@ public class MakeStatisticsJobConfig {
         return new JpaCursorItemReaderBuilder<BookingEntity>()
                 .name("addStatisticsItemReader")
                 .entityManagerFactory(entityManagerFactory)
-                .queryString("select b from BookingEntity b where b.endedAt between :form and :to")
+                .queryString("select b from BookingEntity b where b.endedAt between :from and :to")
                 .parameterValues(Map.of("from", from, "to", to))
                 .build();
     }
@@ -118,6 +121,8 @@ public class MakeStatisticsJobConfig {
             for(BookingEntity bookingEntity: bookingEntities) {
                 final LocalDateTime statisticsAt = bookingEntity.getStatisticsAt();
                 StatisticsEntity statisticsEntity = statisticsEntityMap.get(statisticsAt);
+
+                log.info("size of Enity : " + statisticsEntityMap.size());
 
                 if (statisticsEntity == null) { // HashMap 에 없으면, StatisticsEntity 최초 값을 생성하여 넣음.
                     statisticsEntityMap.put(statisticsAt, StatisticsEntity.create(bookingEntity));
@@ -135,6 +140,7 @@ public class MakeStatisticsJobConfig {
     public Step makeDailyStatisticsStep() {
         return this.stepBuilderFactory.get("makeDailyStatisticsStep")
                 .tasklet(makeDailyStatisticsTasklet)
+                .allowStartIfComplete(true)
                 .build();
     }
 
@@ -143,6 +149,7 @@ public class MakeStatisticsJobConfig {
     public Step makeWeeklyStatisticsStep() {
         return this.stepBuilderFactory.get("makeWeeklyStatisticsStep")
                 .tasklet(makeWeeklyStatisticsTasklet)
+                .allowStartIfComplete(true)
                 .build();
     }
 }
